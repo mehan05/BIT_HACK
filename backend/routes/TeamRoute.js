@@ -8,8 +8,7 @@ import {
   AddMembersToTeam, 
   UpdateMembersInTeam, 
   RemoveMemberFromTeam 
-} from "../controls/teamControl";
-import { checkAdmin } from "../middleware/adminMiddleware"
+} from "../controls/teamControl.js";
 export const TeamRouter = express.Router();
 
 TeamRouter.post("/create-team",CreateTeam)

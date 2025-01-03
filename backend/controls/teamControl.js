@@ -1,9 +1,10 @@
 import { Team } from "../models/model.js";
 import { TeamValidationSchema } from "../validationSchema/TeamValidationSchema.js";
 
+
 export async function CreateTeam(req, res) {
     const body = req.body;
-    const ValidationRes = TeamValidation.safeParse(body);
+    const ValidationRes = TeamValidationSchema.safeParse(body);
     try {
         if (ValidationRes.success) {
             const createTeam = await Team.create(body);
@@ -39,7 +40,7 @@ export const GetTeamById = async (req, res) => {
 export const UpdateTeam = async (req, res) => {
     const { id } = req.params;
     const body = req.body;
-    const ValidationRes = TeamValidation.safeParse(body);
+    const ValidationRes = TeamValidationSchema.safeParse(body);
     try {
         if (ValidationRes.success) {
             const updatedTeam = await Team.findByIdAndUpdate(id, body, { new: true });

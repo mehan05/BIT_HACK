@@ -2,12 +2,13 @@ import express from "express";
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
 import {User}  from "../models/model.js";
+import { loginSchema } from "../validationSchema/loginSchema.js";
 
 export const Loginrouter = express.Router();
 
 Loginrouter.post("/", async(req, res) => { 
     const body = req.body;
-    const ValdationRes = z.safeParse(body); 
+    const ValdationRes = loginSchema.safeParse(body); 
     try {
             if(ValdationRes.success){
                 const {roll_no,name,email,isAdmin} = ValdationRes.data;

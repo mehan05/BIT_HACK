@@ -1,5 +1,5 @@
 import {z} from "zod"
-export const userSchema = z.object({
+export const loginSchema = z.object({
     roll_no:z.string(),
     name:z.string(),
     email:z.string().email(),

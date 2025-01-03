@@ -4,13 +4,15 @@ import connect from './connectdb/connectdb.js';
 import {Loginrouter} from "./routes/loginRoute.js"
 import {PSrouter} from './routes/PSroute.js';
 import { checkAdmin } from './middleware/adminMiddleware.js';
+import { TeamRouter } from './routes/TeamRoute.js';
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 app.use("/api/v1/login",Loginrouter);
-app.use("api/v1/domain-problemStatement",checkAdmin,PSrouter)
+app.use("/api/v1/domain-problemStatement",checkAdmin,PSrouter)
+app.use("/api/v1/teams",TeamRouter)
 connect()
 .then((msg)=>{
     console.log(msg)
