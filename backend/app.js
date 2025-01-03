@@ -1,5 +1,4 @@
 const express = require('express')
-const route = require("./routes/route");
 const cors = require('cors')
 const app = express()
 const connect = require('./connectdb/connectdb');

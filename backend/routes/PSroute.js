@@ -1,5 +1,6 @@
 const express = require("express");
 const { AddDomain, GetAllDomains, GetDomainById, UpdateDomain, UpdateProblemStatement, DeleteDomain, DeleteProblemStatement, AddProblemStatementToDomain } = require("../controls/problemStatement");
+const { SelectProblemStatement } = require("../controls/teamControl");
 const PSrouter = express.Router();
 
 PSrouter.post("/create-domain",AddDomain)
@@ -13,7 +14,5 @@ PSrouter.get("/get-domain/:id",GetDomainById)
 .delete("/delete-domain/:id",DeleteDomain)
 .delete("/delete-problem-statement/:id",DeleteProblemStatement)
 .post("/add-problem-statement-to-domain",AddProblemStatementToDomain)
-
-
-
+.patch("/choose-problem-statement",SelectProblemStatement)
 module.exports = PSrouter;

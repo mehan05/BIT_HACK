@@ -14,5 +14,5 @@ TeamRouter.get("/get-team/:id",GetTeamById)
 .patch("/update-team-members/:id",UpdateMembersInTeam)
 .delete("/remove-member-from-team/:id",RemoveMemberFromTeam)
 
-
+    
 module.exports = TeamRouter;

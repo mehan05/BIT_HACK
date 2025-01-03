@@ -116,3 +116,19 @@ export const RemoveMemberFromTeam = async (req, res) => {
         return  res.status(500).json({ msg: "Server Error", error });
     }
 }
+
+export const SelectProblemStatement = async (req, res) => {
+    const { id } = req.params;
+    const { problemStatementId } = req.body;
+    try {
+       const updatedTeam = await Team.findByIdAndUpdate(id,
+        {$push:{selectedProblemStatements: problemStatementId}},
+        { new: true }
+       )
+       if (!updatedTeam) return res.status(404).json({ msg: "Team not found" });
+       return res.status(200).json({ msg: "Team Updated", data: updatedTeam });
+    }
+    catch (error) {
+        return  res.status(500).json({ msg: "Server Error", error });
+    }
+}
