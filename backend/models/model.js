@@ -19,7 +19,7 @@ const userSchema = new Schema({
 });
 
 const teamSchema = new Schema({
-    team_name: { type: String, required: true },
+    team_name: { type: String, required: true ,unique:true},
     members: [{ type: Schema.Types.ObjectId, ref: "User" }],
     selectedProblemStatements: [{ type: Schema.Types.ObjectId, ref: "ProblemStatement" }],
 });

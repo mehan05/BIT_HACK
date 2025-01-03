@@ -66,7 +66,7 @@ export const DeleteTeam = async (req, res) => {
 
 export const AddMembersToTeam = async (req, res) => {
     const { id } = req.params;
-    const userId = req.body;
+    const {userId} = req.body;
     try {
         const updatedTeam = await Team.findByIdAndUpdate(id, {$push:{members: userId}}, { new: true });
         if (!updatedTeam) return res.status(404).json({ msg: "Team not found" });
@@ -93,10 +93,12 @@ export const UpdateMembersInTeam = async (req, res) => {
     try {
         const team = await Team.findById(id);
         if(!team) return res.status(404).json({ msg: "Team not found" });
-
-        const TeamMemberIndex = await team.members.indexOd(oldUserId);
+       
+        const TeamMemberIndex =  team.members.indexOf(oldUserId);
         team.members[TeamMemberIndex] = newUserId;
         await team.save();
+
+        return res.status(200).json({ msg: "Team Updated", data: team });
     } catch (error) {
         return res.status(500).json({ msg: "Server Error", error });
     }
@@ -111,7 +113,7 @@ export const RemoveMemberFromTeam = async (req, res) => {
         { new: true }
        )
        if (!updatedTeam) return res.status(404).json({ msg: "Team not found" });
-       return res.status(200).json({ msg: "Team Updated", data: updatedTeam });
+       return res.status(200).json({ msg: "Member deleted", data: updatedTeam });
     }
     catch (error) {
         return  res.status(500).json({ msg: "Server Error", error });
