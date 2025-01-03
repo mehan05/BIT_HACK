@@ -1,12 +1,12 @@
-const DataModel = require('../models/model');
+import { findOne, create, findOneAndDelete, findOneAndUpdate } from '../models/model.js';
 const AddDomain =async (req,res)=>{
     const{name} =req.body;
     try {
-        const existing = await DataModel.findOne({name});
+        const existing = await findOne({name});
         if(existing){
             return res.json({msg:"Domain already Exist"});
         }
-        const newDomain = await DataModel.create({name, problemStatement: []});
+        const newDomain = await create({name, problemStatement: []});
         res.json({msg:"Domain Added",data:newDomain})
     } catch (error) {
         res.json({msg:error})
@@ -18,13 +18,13 @@ const AddDomain =async (req,res)=>{
 const deleteDomain = async(req,res)=>{
     const {name} = req.body;
     try {
-        const contains = await DataModel.findOne({name});
+        const contains = await findOne({name});
         if(!contains)
         {
             return res.status(100).json({msg:`No domain named:${name}`});
         }
         try {
-            const deleting = await DataModel.findOneAndDelete({name});
+            const deleting = await findOneAndDelete({name});
             if(deleting)
             {
                 res.status(200).json({msg:`Deleted:${name}`})
@@ -46,7 +46,7 @@ const deleteDomain = async(req,res)=>{
 const AddProblemStatement = async(req,res)=>{
     const{name,problemStatement} = req.body;
     try {
-        const AddProblemStatement = await DataModel.findOneAndUpdate(
+        const AddProblemStatement = await findOneAndUpdate(
             {name},
             { $addToSet: { problemStatement: { $each: problemStatement } } },  
             { new: true, useFindAndModify: false }  ,
@@ -66,7 +66,7 @@ const deleteProblemStatement = async (req, res) => {
     const { name } = req.body; 
 
     try {
-        const domain = await DataModel.findOne({ name });
+        const domain = await findOne({ name });
         if (!domain) {
             return res.status(404).json({ success: false, msg: `Domain not found: ${name}` });
         }
@@ -91,7 +91,7 @@ const updateProblemStatementByIndex = async (req, res) => {
     const { name, updatedProblemStatement } = req.body;
 
     try {
-        const domain = await DataModel.findOne({ name });
+        const domain = await findOne({ name });
         
         if (!domain) {
             return res.status(404).json({ success: false, msg: `Domain not found: ${name}` });
@@ -101,7 +101,7 @@ const updateProblemStatementByIndex = async (req, res) => {
             return res.status(400).json({ success: false, msg: `Index out of bounds` });
         }
 
-        const updatedDomain = await DataModel.findOneAndUpdate(
+        const updatedDomain = await findOneAndUpdate(
             { name }, 
             { $set: { [`problemStatement.${index}`]: updatedProblemStatement } },  
             { new: true, useFindAndModify: false }
@@ -118,4 +118,4 @@ const updateProblemStatementByIndex = async (req, res) => {
     }
 }
 
-module.exports = {AddDomain,AddProblemStatement,deleteProblemStatement,deleteDomain,updateProblemStatementByIndex,};
+export default {AddDomain,AddProblemStatement,deleteProblemStatement,deleteDomain,updateProblemStatementByIndex,};

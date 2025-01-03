@@ -1,8 +1,9 @@
-const express = require("express");
-const Loginrouter  = express.Router();
-const {z} = require('zod');
-const jwt = require('jsonwebtoken')
-const { User } = require("../models/model");
+import express from "express";
+import { z } from 'zod';
+import jwt from 'jsonwebtoken';
+import {User}  from "../models/model.js";
+
+export const Loginrouter = express.Router();
 
 Loginrouter.post("/", async(req, res) => { 
     const body = req.body;
@@ -26,4 +27,3 @@ Loginrouter.post("/", async(req, res) => {
 })
 
 
-module.exports = Loginrouter

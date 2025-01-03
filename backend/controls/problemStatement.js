@@ -1,7 +1,6 @@
-import { Domain, ProblemStatement } from "../models/model";
-import { DomainValidation } from "../validationSchema/domainSchema";
-import { ProblemStatementSchema } from "../validationSchema/problemStatementSchema";
-
+import { Domain, ProblemStatement } from "../models/model.js";
+import { DomainValidation } from "../validationSchema/domainSchema.js";
+import { ProblemStatementSchema } from "../validationSchema/problemStatementSchema.js";
 // CREATE Domain
 export const AddDomain = async (req, res) => {
     const body = req.body;

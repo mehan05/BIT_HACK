@@ -1,7 +1,16 @@
-const express = require("express");
-const { CreateTeam, GetAllTeams, GetTeamById, UpdateTeam, DeleteTeam, AddMembersToTeam, UpdateMembersInTeam, RemoveMemberFromTeam } = require("../controls/teamControl");
-const { checkAdmin } = require("../middleware/adminMiddleware");
-const TeamRouter = express.Router();
+import express from "express";
+import { 
+  CreateTeam, 
+  GetAllTeams, 
+  GetTeamById, 
+  UpdateTeam, 
+  DeleteTeam, 
+  AddMembersToTeam, 
+  UpdateMembersInTeam, 
+  RemoveMemberFromTeam 
+} from "../controls/teamControl";
+import { checkAdmin } from "../middleware/adminMiddleware"
+export const TeamRouter = express.Router();
 
 TeamRouter.post("/create-team",CreateTeam)
 .get("/get-all-teams",GetAllTeams)
@@ -15,4 +24,3 @@ TeamRouter.get("/get-team/:id",GetTeamById)
 .delete("/remove-member-from-team/:id",RemoveMemberFromTeam)
 
     
-module.exports = TeamRouter;

@@ -1,4 +1,4 @@
-const {z}  = require("zod");
+import {z} from "zod"
 export const TeamValidationSchema = z.object({
     team_id:z.string(),
     team_name:z.string(),

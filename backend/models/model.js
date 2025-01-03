@@ -1,36 +1,36 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const problemStatementSchema = new mongoose.Schema({
+const problemStatementSchema = new Schema({
     title: { type: String, required: true },
     description: { type: String },
     cluster: { type: String, required: true }, 
 });
 
-const domainSchema = new mongoose.Schema({
+const domainSchema = new Schema({
     name: { type: String, required: true, unique: true },
-    problemStatements: [{ type: mongoose.Schema.Types.ObjectId, ref: "ProblemStatement" }],
+    problemStatements: [{ type: Schema.Types.ObjectId, ref: "ProblemStatement" }],
 });
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     roll_no: { type: String, unique: true, required: true },
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     isAdmin: { type: Boolean, default: false }, 
 });
 
-const teamSchema = new mongoose.Schema({
+const teamSchema = new Schema({
     team_id: { type: String, unique: true, required: true },
     team_name: { type: String, required: true },
-    members: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    selectedProblemStatements: [{ type: mongoose.Schema.Types.ObjectId, ref: "ProblemStatement" }],
+    members: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    selectedProblemStatements: [{ type: Schema.Types.ObjectId, ref: "ProblemStatement" }],
 });
 
-const ProblemStatement = mongoose.model("ProblemStatement", problemStatementSchema);
-const Domain = mongoose.model("Domain", domainSchema);
-const User = mongoose.model("User", userSchema);
-const Team = mongoose.model("Team", teamSchema);
+const ProblemStatement = model("ProblemStatement", problemStatementSchema);
+const Domain = model("Domain", domainSchema);
+const User = model("User", userSchema);
+const Team = model("Team", teamSchema);
 
-module.exports = {
+export  {
     ProblemStatement,
     Domain,
     User,

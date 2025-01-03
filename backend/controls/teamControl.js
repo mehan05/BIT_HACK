@@ -1,5 +1,5 @@
-import { Team } from "../models/model";
-import { TeamValidation } from "../validationSchema/teamSchema";
+import { Team } from "../models/model.js";
+import { TeamValidationSchema } from "../validationSchema/TeamValidationSchema.js";
 
 export async function CreateTeam(req, res) {
     const body = req.body;
